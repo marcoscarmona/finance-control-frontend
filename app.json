@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "Finance Control",
+    "slug": "finance-control",
+    "scheme": "finance-control",
+    "web": { "bundler": "metro" },
+    "experiments": { "typedRoutes": true }
+  }
+}

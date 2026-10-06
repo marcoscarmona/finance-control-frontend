@@ -1,0 +1,16 @@
+export type Id = string;
+export type User = { id: Id; name: string; email: string; createdAt: string };
+export type BankType = 'BANK' | 'DIGITAL_WALLET';
+export type AccountType = 'CHECKING' | 'SAVINGS' | 'CASH';
+export type PaymentMethod = 'CREDIT_CARD' | 'DEBIT_CARD' | 'PIX' | 'CASH' | 'BANK_TRANSFER';
+export type SubscriptionFrequency = 'MONTHLY' | 'QUARTERLY' | 'YEARLY';
+export type Bank = { id: Id; userId: Id; name: string; code?: string | null; type: BankType };
+export type Account = { id: Id; userId: Id; bankId: Id; name: string; type: AccountType };
+export type Category = { id: Id; userId: Id; name: string; color: string; active: boolean };
+export type CreditCard = { id: Id; userId: Id; bankId: Id; name: string; lastFourDigits: string; limitAmount: number; closingDay: number; dueDay: number; active: boolean };
+export type Expense = { id: Id; userId: Id; categoryId: Id; accountId?: Id | null; creditCardId?: Id | null; subscriptionId?: Id | null; description: string; merchant?: string | null; purchaseDate: string; totalAmount: number; paymentMethod: PaymentMethod; status: string; createdAt: string };
+export type ExpenseInstallment = { id: Id; expenseId: Id; invoiceId?: Id | null; number: number; total: number; amount: number; dueDate: string; status: string };
+export type Subscription = { id: Id; userId: Id; categoryId: Id; creditCardId?: Id | null; accountId?: Id | null; name: string; amount: number; frequency: SubscriptionFrequency; chargeDay: number; active: boolean };
+export type InvoiceDetails = { invoice: { id: Id; creditCardId: Id; referenceMonth: string; closingDate: string; dueDate: string; status: string }; installments: ExpenseInstallment[] };
+export type MonthlyReport = { totalExpenses: number; expensesByCategory: { category: string; total: number }[]; cardInvoices: { cardId: Id; cardName: string; total: number }[]; activeSubscriptions: { name: string; amount: number; frequency: SubscriptionFrequency }[]; upcomingInstallments: ExpenseInstallment[] };
+export type CreateExpenseInput = { categoryId: Id; accountId?: Id; creditCardId?: Id; description: string; merchant?: string; purchaseDate: string; totalAmount: number; paymentMethod: PaymentMethod; installments: number };
